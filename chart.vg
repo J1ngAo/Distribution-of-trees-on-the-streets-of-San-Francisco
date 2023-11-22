@@ -1,0 +1,67 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Your visualization description",
+  "data": {
+    "url": "https://raw.githubusercontent.com/J1ngAo/Distribution-of-trees-on-the-streets-of-San-Francisco/main/selected_data.csv"
+  },
+  "hconcat": [
+    {
+    "mark": "bar",
+    "description": "3Your visualization description",
+    "encoding": {
+      "y": {
+        "field": "name",
+        "type": "nominal",
+
+        "sort": {"op": "count", "field": "species", "order": "descending"},
+        "axis": {"title": "County Name"}
+      },
+      "x": {
+        "aggregate": "count",
+        "field": "species",
+        "type": "quantitative",
+        "axis": {"title": "Number of Trees"}
+      },
+      "color": {
+        "field": "decade",
+        "type": "nominal",
+        "legend": {"title": "Decade"}
+      }
+    }
+  },
+  {  "vconcat": [
+    {
+      "mark": "bar",
+      "description": "2Your visualization description",
+      "encoding": {
+        "x": {
+          "aggregate": "count",
+          "field": "species",
+          "type": "quantitative",
+          "axis": {"title": "Number of Trees"}
+        },
+        "y": {
+          "field": "species",
+          "type": "nominal",
+          "axis": {"title": "Tree Species"},
+          "sort": {"op": "count", "field": "species", "order": "descending"}
+        },
+        "color": {
+          "field": "decade",
+          "type": "nominal",
+          "legend": {"title": "Decade"}
+        }
+      
+  }
+},
+
+  {
+    "mark": "bar",
+    "description": "1Your visualization description"
+  }
+    
+]
+
+}
+]
+}
