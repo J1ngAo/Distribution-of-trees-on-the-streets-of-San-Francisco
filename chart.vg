@@ -7,7 +7,7 @@
   "hconcat": [
     {
     "mark": "bar",
-    "description": "3Your visualization description",
+    "description": "county- number of trees",
     "encoding": {
       "y": {
         "field": "name",
@@ -31,16 +31,42 @@
   },
   {  "vconcat": [
     {
-      "mark": "bar",
-      "description": "2Your visualization description",
+      "data": {
+        "url": "https://raw.githubusercontent.com/J1ngAo/Distribution-of-trees-on-the-streets-of-San-Francisco/main/san-francisco-ca_.geojson",
+        "format": {"type": "topojson"}
+      },
+      "mark": "geoshape",
+      "projection": {
+        "type": "mercator",
+        "scale": 500
+      },
       "encoding": {
-        "x": {
+        "color": {"value": "#DDD"}
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/J1ngAo/Distribution-of-trees-on-the-streets-of-San-Francisco/main/selected_data.csv"
+      },
+      "mark": "circle",
+      "encoding": {
+        "longitude": {"field": "longitude", "type": "quantitative"},
+        "latitude": {"field": "latitude", "type": "quantitative"},
+        "size": {"aggregate": "count", "type": "quantitative", "title": "Number of Trees"},
+        "color": {"field": "decade", "type": "nominal", "legend": {"title": "Decade"}}
+      }
+    },
+    {
+      "mark": "bar",
+      "description": "species-number of trees",
+      "encoding": {
+        "y": {
           "aggregate": "count",
           "field": "species",
           "type": "quantitative",
           "axis": {"title": "Number of Trees"}
         },
-        "y": {
+        "x": {
           "field": "species",
           "type": "nominal",
           "axis": {"title": "Tree Species"},
@@ -53,12 +79,9 @@
         }
       
   }
-},
+}
 
-  {
-    "mark": "bar",
-    "description": "1Your visualization description"
-  }
+
     
 ]
 
