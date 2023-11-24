@@ -1,12 +1,15 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Your visualization description",
+
   "data": {
     "url": "https://raw.githubusercontent.com/J1ngAo/Distribution-of-trees-on-the-streets-of-San-Francisco/main/selected_data.csv"
   },
   "hconcat": [
     {
     "mark": "bar",
+    "width": 100,
+    "height": 500,
     "description": "county- number of trees",
     "encoding": {
       "y": {
@@ -29,47 +32,57 @@
       }
     }
   },
-  {  "vconcat": [
+  { "vconcat": [
     {
-      "data": {
-        "url": "https://raw.githubusercontent.com/J1ngAo/Distribution-of-trees-on-the-streets-of-San-Francisco/main/san-francisco-ca_.geojson",
-        "format": {"type": "topojson"}
-      },
-      "mark": "geoshape",
+      "width": 500,
+      "height": 500,
       "projection": {
-        "type": "mercator",
-        "scale": 500
+        "type": "mercator"
       },
-      "encoding": {
-        "color": {"value": "#DDD"}
-      }
+      "layer": [
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/J1ngAo/Distribution-of-trees-on-the-streets-of-San-Francisco/main/san-francisco-ca_.json",
+            "format": {"type": "json"}
+          },
+          "mark": {
+            "type": "geoshape",
+            "fill": "#eee",
+            "stroke": "#757575",
+            "strokeWidth": 0.5
+          }
+        },
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/J1ngAo/Distribution-of-trees-on-the-streets-of-San-Francisco/main/selected_data.csv"
+          },
+          "mark": "circle",
+          "encoding": {
+            "longitude": {"field": "longitude", "type": "quantitative"},
+            "latitude": {"field": "latitude", "type": "quantitative"},
+            "size": {"aggregate": "count", "type": "quantitative", "title": "Number of Trees"},
+            "color": {"field": "decade", "type": "nominal", "legend": {"title": "Decade"}}
+          }
+        }
+      ]
     },
     {
       "data": {
         "url": "https://raw.githubusercontent.com/J1ngAo/Distribution-of-trees-on-the-streets-of-San-Francisco/main/selected_data.csv"
       },
-      "mark": "circle",
-      "encoding": {
-        "longitude": {"field": "longitude", "type": "quantitative"},
-        "latitude": {"field": "latitude", "type": "quantitative"},
-        "size": {"aggregate": "count", "type": "quantitative", "title": "Number of Trees"},
-        "color": {"field": "decade", "type": "nominal", "legend": {"title": "Decade"}}
-      }
-    },
-    {
       "mark": "bar",
       "description": "species-number of trees",
       "encoding": {
         "y": {
+          "field": "species",
+          "type": "nominal",
+          "axis": {"title": "Tree Species"}
+        },
+        "x": {
           "aggregate": "count",
           "field": "species",
           "type": "quantitative",
-          "axis": {"title": "Number of Trees"}
-        },
-        "x": {
-          "field": "species",
-          "type": "nominal",
-          "axis": {"title": "Tree Species"},
+          "axis": {"title": "Number of Trees"},
           "sort": {"op": "count", "field": "species", "order": "descending"}
         },
         "color": {
@@ -77,13 +90,10 @@
           "type": "nominal",
           "legend": {"title": "Decade"}
         }
-      
-  }
-}
-
-
-    
-]
+      },
+      "width": 500
+    }
+  ]
 
 }
 ]
