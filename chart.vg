@@ -8,9 +8,16 @@
   "hconcat": [
     {
     "mark": "bar",
-    "width": 100,
-    "height": 500,
-    "description": "county- number of trees",
+    "width": 200,
+    "height": 800,
+    "description": "left:county- number of trees",
+    "selection": {
+      "countySelection": {
+        "type": "single",
+        "fields": ["name"],
+        "bind": "legend"
+      }
+    },
     "encoding": {
       "y": {
         "field": "name",
@@ -26,16 +33,17 @@
         "axis": {"title": "Number of Trees"}
       },
       "color": {
-        "field": "decade",
+        "field": "decade_group",
         "type": "nominal",
-        "legend": {"title": "Decade"}
+        "legend": {"title": "Decade Groups"}
       }
     }
+
   },
   { "vconcat": [
     {
-      "width": 500,
-      "height": 500,
+      "width": 600,
+      "height": 600,
       "projection": {
         "type": "mercator"
       },
@@ -53,6 +61,7 @@
           }
         },
         {
+          "transform": [{"filter": {"selection": "countySelection"}}],
           "data": {
             "url": "https://raw.githubusercontent.com/J1ngAo/Distribution-of-trees-on-the-streets-of-San-Francisco/main/selected_data.csv"
           },
@@ -61,7 +70,7 @@
             "longitude": {"field": "longitude", "type": "quantitative"},
             "latitude": {"field": "latitude", "type": "quantitative"},
             "size": {"aggregate": "count", "type": "quantitative", "title": "Number of Trees"},
-            "color": {"field": "decade", "type": "nominal", "legend": {"title": "Decade"}}
+            "color": {"field": "decade_group", "type": "nominal", "legend": {"title": "Decade Groups"}}
           }
         }
       ]
@@ -71,14 +80,17 @@
         "url": "https://raw.githubusercontent.com/J1ngAo/Distribution-of-trees-on-the-streets-of-San-Francisco/main/selected_data.csv"
       },
       "mark": "bar",
-      "description": "species-number of trees",
+      "description": "right down:species-number of trees",
+      "width": 500,
+      "height": 200,
+
       "encoding": {
-        "y": {
+        "x": {
           "field": "species",
           "type": "nominal",
           "axis": {"title": "Tree Species"}
         },
-        "x": {
+        "y": {
           "aggregate": "count",
           "field": "species",
           "type": "quantitative",
@@ -86,12 +98,11 @@
           "sort": {"op": "count", "field": "species", "order": "descending"}
         },
         "color": {
-          "field": "decade",
+          "field": "decade_group",
           "type": "nominal",
-          "legend": {"title": "Decade"}
+          "legend": {"title": "Decade Groups"}
         }
-      },
-      "width": 500
+      }
     }
   ]
 
