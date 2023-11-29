@@ -11,13 +11,7 @@
     "width": 200,
     "height": 800,
     "description": "left:county- number of trees",
-    "selection": {
-      "countySelection": {
-        "type": "single",
-        "fields": ["name"],
-        "bind": "legend"
-      }
-    },
+
     "encoding": {
       "y": {
         "field": "name",
@@ -61,7 +55,7 @@
           }
         },
         {
-          "transform": [{"filter": {"selection": "countySelection"}}],
+  
           "data": {
             "url": "https://raw.githubusercontent.com/J1ngAo/Distribution-of-trees-on-the-streets-of-San-Francisco/main/selected_data.csv"
           },
