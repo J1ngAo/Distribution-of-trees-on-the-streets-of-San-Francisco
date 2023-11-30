@@ -8,10 +8,25 @@
   "hconcat": [
     {
     "mark": "bar",
+    "description": "county- number of trees",
+    "transform": [
+      {"filter": {"param": "species_selection"}},
+      {"filter": {"param": "decade_selection"}},
+      {"Filter": {"param": "county_selection"}},
+      {"Filter": {"param": "tree_number_selection"}}
+    ],
+    "params": [
+      {
+        "name": "county_selection",
+        "select": {
+          "type": "point",
+          "fields": ["name"],
+          "encodings": ["y"]
+        }
+      }
+    ],
     "width": 200,
     "height": 800,
-    "description": "left:county- number of trees",
-
     "encoding": {
       "y": {
         "field": "name",
@@ -60,6 +75,24 @@
             "url": "https://raw.githubusercontent.com/J1ngAo/Distribution-of-trees-on-the-streets-of-San-Francisco/main/selected_data.csv"
           },
           "mark": "circle",
+          "description": "map",
+          "transform": [
+            {"filter": {"param": "species_selection"}},
+            {"filter": {"param": "decade_selection"}},
+            {"filter": {"param": "county_selection"}},
+            {"Filter": {"param": "tree_number_selection"}}
+          ],
+          "params": [
+            {
+              "name": "decade_selection",
+              "select": {
+                "type": "point",
+                "fields": ["decade_group"]
+              },
+              "bind": "legend" 
+            }
+          ],
+          
           "encoding": {
             "longitude": {"field": "longitude", "type": "quantitative"},
             "latitude": {"field": "latitude", "type": "quantitative"},
@@ -74,10 +107,25 @@
         "url": "https://raw.githubusercontent.com/J1ngAo/Distribution-of-trees-on-the-streets-of-San-Francisco/main/selected_data.csv"
       },
       "mark": "bar",
-      "description": "right down:species-number of trees",
+      "transform": [
+        {"Filter": {"param": "species_selection"}},
+        {"filter": {"param": "decade_selection"}},
+        {"filter": {"param": "county_selection"}},
+        {"Filter": {"param": "tree_number_selection"}}
+      ],
+      "params": [
+        {
+          "name": "species_selection",
+          "select": {
+            "type": "point",
+            "fields": ["species"],
+            "encodings": ["y"] 
+          }
+        }
+      ],
+      "description": "species",
       "width": 500,
       "height": 200,
-
       "encoding": {
         "x": {
           "field": "species",
